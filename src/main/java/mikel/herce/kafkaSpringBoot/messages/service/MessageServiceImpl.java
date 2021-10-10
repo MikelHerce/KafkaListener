@@ -12,22 +12,21 @@ import mikel.herce.kafkaSpringBoot.messages.repository.MessageRespository;
 public class MessageServiceImpl implements MessageService {
 	
 	@Autowired
-	MessageRespository messageRespository;
+	MessageRespository messageRepository;
 
 	@Override
 	public void addMessage(String message) throws IOException {
-		messageRespository.addMessageToBuffer(message);
-
+		messageRepository.addMessageToBuffer(message);
 	}
 
 	@Override
 	public List<String> getAllMessages(){
-		return messageRespository.getAllMessages();
+		return messageRepository.getAllMessages();
 	}
 
 	@Override
 	public void deleteAllMessages() {
-		messageRespository.deleteMessages();
+		messageRepository.deleteMessages();
 	}
 
 }
