@@ -11,7 +11,7 @@ public class MessageMemoryListImpl implements MessageRespository {
 	static List<String> messagesBuffer = new ArrayList<String>();
 
 	@Override
-	public void addMessageToBuffer(String message) throws IOException {
+	public void addMessage(String message) throws IOException {
 		messagesBuffer.add(message);
 	}
 

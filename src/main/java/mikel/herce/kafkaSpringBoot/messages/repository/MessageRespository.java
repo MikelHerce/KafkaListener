@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface MessageRespository {
-	public void addMessageToBuffer(String message) throws IOException;
+	public void addMessage(String message) throws IOException;
 	public List<String> getAllMessages();
 	public void deleteMessages();
 }
