@@ -6,4 +6,5 @@ import java.util.List;
 public interface MessageRespository {
 	public void addMessageToBuffer(String message) throws IOException;
 	public List<String> getAllMessages();
+	public void deleteMessages();
 }

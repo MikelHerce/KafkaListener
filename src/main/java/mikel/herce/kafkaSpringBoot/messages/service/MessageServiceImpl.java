@@ -21,8 +21,13 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<String> getAllMessages() throws IOException {
+	public List<String> getAllMessages(){
 		return messageRespository.getAllMessages();
+	}
+
+	@Override
+	public void deleteAllMessages() {
+		messageRespository.deleteMessages();
 	}
 
 }

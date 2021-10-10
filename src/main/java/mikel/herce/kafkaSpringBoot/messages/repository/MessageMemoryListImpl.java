@@ -20,4 +20,9 @@ public class MessageMemoryListImpl implements MessageRespository {
 		return messagesBuffer;
 	}
 
+	@Override
+	public void deleteMessages() {
+		messagesBuffer.clear();
+	}
+
 }
