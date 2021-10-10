@@ -7,5 +7,6 @@ public interface MessageService {
 	public void addMessage(String message) throws IOException;
 	public List<String> getAllMessages();
 	public void deleteAllMessages();
+	public void saveToDisk();
 	
 }

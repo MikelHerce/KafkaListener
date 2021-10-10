@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mikel.herce.kafkaSpringBoot.constants.LogConstant;
+import mikel.herce.kafkaSpringBoot.disk.repository.DiskRespository;
+import mikel.herce.kafkaSpringBoot.messages.helper.MessageFormatterHelper;
 import mikel.herce.kafkaSpringBoot.messages.repository.MessageRespository;
 
 @Service
@@ -19,34 +21,40 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	MessageRespository messageRepository;
 
+	@Autowired
+	DiskRespository diskRepository;
+
+	@Autowired
+	MessageFormatterHelper messageFomatter;
+
 	@Override
 	public void addMessage(String message) throws IOException {
 		messageRepository.addMessage(message);
 		LOG.info(LogConstant.MESSAGE_ADDED + LogConstant.DOUBLE_POINT_SPACE + message);
 		if (isMessageLimitReached()) {
-			saveToDisk();
+			this.saveToDisk();
 		}
 	}
 
-	private boolean isMessageLimitReached() {
-		return messageRepository.getAllMessages().size() >= 3 ? true : false;
-	}
-
-	private void saveToDisk() {
-		LOG.info("lo guardamos a disco");
+	@Override
+	public void saveToDisk() {
+		String textToSave = messageFomatter.formatMessages(getAllMessages());
+		diskRepository.saveToDisk(textToSave);
 		messageRepository.deleteMessages();
 	}
 
 	@Override
 	public List<String> getAllMessages() {
-		LOG.info(LogConstant.MESSAGE_GET);
 		return messageRepository.getAllMessages();
 	}
 
 	@Override
 	public void deleteAllMessages() {
-		LOG.info(LogConstant.MESSAGE_DELETED);
 		messageRepository.deleteMessages();
+	}
+
+	private boolean isMessageLimitReached() {
+		return messageRepository.getAllMessages().size() >= 10 ? true : false;
 	}
 
 }
