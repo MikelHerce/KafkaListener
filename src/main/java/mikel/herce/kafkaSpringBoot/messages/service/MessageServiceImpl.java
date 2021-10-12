@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import mikel.herce.kafkaSpringBoot.constants.LogConstant;
 import mikel.herce.kafkaSpringBoot.disk.repository.DiskRespository;
 import mikel.herce.kafkaSpringBoot.messages.helper.MessageFormatterHelper;
-import mikel.herce.kafkaSpringBoot.messages.repository.MessageRespository;
+import mikel.herce.kafkaSpringBoot.messages.repository.MessageRepository;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -19,7 +19,7 @@ public class MessageServiceImpl implements MessageService {
 	private static Logger LOG = LoggerFactory.getLogger(MessageServiceImpl.class);
 
 	@Autowired
-	MessageRespository messageRepository;
+	MessageRepository messageRepository;
 
 	@Autowired
 	DiskRespository diskRepository;

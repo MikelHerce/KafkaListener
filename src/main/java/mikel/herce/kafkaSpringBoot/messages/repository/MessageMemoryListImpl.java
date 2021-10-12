@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MessageMemoryListImpl implements MessageRespository {
+public class MessageMemoryListImpl implements MessageRepository {
 	static List<String> messagesBuffer = new ArrayList<String>();
 
 	@Override
