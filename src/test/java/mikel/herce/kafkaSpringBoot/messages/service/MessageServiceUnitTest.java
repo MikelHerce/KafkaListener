@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import mikel.herce.kafkaSpringBoot.ApplicationConfig;
 import mikel.herce.kafkaSpringBoot.disk.repository.DiskRepository;
+import mikel.herce.kafkaSpringBoot.disk.repository.EmptyTextToSaveException;
 import mikel.herce.kafkaSpringBoot.messages.helper.MessageFormatterHelper;
 import mikel.herce.kafkaSpringBoot.messages.repository.MessageRepository;
 
@@ -57,7 +58,7 @@ public class MessageServiceUnitTest {
 	}
 
 	@Test
-	void saveToDisk_test() {
+	void saveToDisk_test() throws EmptyTextToSaveException {
 		// given
 		String formattedText = "formatted text";
 		Mockito.when(messageFormatter.formatMessages(Mockito.anyList())).thenReturn(formattedText);
@@ -69,7 +70,7 @@ public class MessageServiceUnitTest {
 	}
 
 	@Test
-	void add_message_without_reaching_limit() throws IOException {
+	void add_message_without_reaching_limit() throws IOException, EmptyTextToSaveException {
 		// given
 		String message = "a message";
 
@@ -87,7 +88,7 @@ public class MessageServiceUnitTest {
 	}
 
 	@Test
-	void add_message_with_reaching_limit() throws IOException {
+	void add_message_with_reaching_limit() throws IOException, EmptyTextToSaveException {
 		// given
 		String message = "a message";
 		String formattedMessage = "a message";

@@ -29,9 +29,14 @@ public class ScheduledMessageSaver {
 	
 
 	@Scheduled(fixedDelayString = "${miliseconds.to.save}")
-	public void saveToDisk() {
+	private void saveToDisk() {
 		LOG.info("Save scheduled time {}", dateFormat.format(new Date()));
-		messageService.saveToDisk();
+		try {
+			messageService.saveToDisk();
+			
+		} catch (Exception e) {
+			LOG.error("Nothing to save");
+		}
 
 	}
 }

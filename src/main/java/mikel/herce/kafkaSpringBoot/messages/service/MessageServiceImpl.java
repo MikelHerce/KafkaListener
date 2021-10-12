@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import mikel.herce.kafkaSpringBoot.ApplicationConfig;
 import mikel.herce.kafkaSpringBoot.constants.LogConstant;
 import mikel.herce.kafkaSpringBoot.disk.repository.DiskRepository;
+import mikel.herce.kafkaSpringBoot.disk.repository.EmptyTextToSaveException;
 import mikel.herce.kafkaSpringBoot.messages.helper.MessageFormatterHelper;
 import mikel.herce.kafkaSpringBoot.messages.repository.MessageRepository;
 
@@ -32,7 +33,7 @@ public class MessageServiceImpl implements MessageService {
 	MessageFormatterHelper messageFomatter;
 
 	@Override
-	public void addMessage(String message) throws IOException {
+	public void addMessage(String message) throws IOException, EmptyTextToSaveException{
 		messageRepository.addMessage(message);
 		LOG.info(LogConstant.MESSAGE_ADDED + LogConstant.DOUBLE_POINT_SPACE + message);
 		if (isMessageLimitReached()) {
@@ -41,7 +42,7 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public void saveToDisk() {
+	public void saveToDisk() throws EmptyTextToSaveException {
 		String textToSave = messageFomatter.formatMessages(getAllMessages());
 		diskRepository.saveToDisk(textToSave);
 		messageRepository.deleteMessages();

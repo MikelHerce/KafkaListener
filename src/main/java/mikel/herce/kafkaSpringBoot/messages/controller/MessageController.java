@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import mikel.herce.kafkaSpringBoot.disk.repository.EmptyTextToSaveException;
 import mikel.herce.kafkaSpringBoot.messages.service.MessageService;
 
 @RestController
@@ -20,7 +21,13 @@ public class MessageController {
 
 	@GetMapping("/addMessage/{message}")
 	public void addMessage(@PathVariable String message) throws IOException {
-		messageService.addMessage(message);
+		try {
+			messageService.addMessage(message);
+		} catch (EmptyTextToSaveException e) {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	@GetMapping("/getMessages")
