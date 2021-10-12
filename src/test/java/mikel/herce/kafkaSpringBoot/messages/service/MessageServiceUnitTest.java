@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import mikel.herce.kafkaSpringBoot.ApplicationConfig;
-import mikel.herce.kafkaSpringBoot.disk.repository.DiskRespository;
+import mikel.herce.kafkaSpringBoot.disk.repository.DiskRepository;
 import mikel.herce.kafkaSpringBoot.messages.helper.MessageFormatterHelper;
 import mikel.herce.kafkaSpringBoot.messages.repository.MessageRepository;
 
@@ -27,7 +27,7 @@ public class MessageServiceUnitTest {
 	MessageRepository mockedMessageRepository;
 
 	@Mock
-	DiskRespository mockedDiskRepository;
+	DiskRepository mockedDiskRepository;
 
 	@Mock
 	MessageFormatterHelper messageFormatter;

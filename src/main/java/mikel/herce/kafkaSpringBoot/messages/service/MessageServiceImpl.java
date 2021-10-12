@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import mikel.herce.kafkaSpringBoot.ApplicationConfig;
 import mikel.herce.kafkaSpringBoot.constants.LogConstant;
-import mikel.herce.kafkaSpringBoot.disk.repository.DiskRespository;
+import mikel.herce.kafkaSpringBoot.disk.repository.DiskRepository;
 import mikel.herce.kafkaSpringBoot.messages.helper.MessageFormatterHelper;
 import mikel.herce.kafkaSpringBoot.messages.repository.MessageRepository;
 
@@ -26,7 +26,7 @@ public class MessageServiceImpl implements MessageService {
 	MessageRepository messageRepository;
 
 	@Autowired
-	DiskRespository diskRepository;
+	DiskRepository diskRepository;
 
 	@Autowired
 	MessageFormatterHelper messageFomatter;

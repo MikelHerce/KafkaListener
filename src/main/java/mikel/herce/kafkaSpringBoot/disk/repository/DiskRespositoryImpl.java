@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DiskRespositoryImpl implements DiskRespository {
+public class DiskRespositoryImpl implements DiskRepository {
 
 	private static Logger LOG = LoggerFactory.getLogger(DiskRespositoryImpl.class);
 
