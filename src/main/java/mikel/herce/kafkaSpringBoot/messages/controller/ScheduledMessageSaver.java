@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import mikel.herce.kafkaSpringBoot.ApplicationConfig;
 import mikel.herce.kafkaSpringBoot.messages.service.MessageService;
 
 @Component
@@ -18,12 +19,16 @@ public class ScheduledMessageSaver {
 
 	@Autowired
 	MessageService messageService;
+	
+	@Autowired
+	static ApplicationConfig appConfig;
 
 	private static final Logger LOG = LoggerFactory.getLogger(ScheduledMessageSaver.class);
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+	
 
-	@Scheduled(fixedRate = 5000)
+	@Scheduled(fixedDelayString = "${miliseconds.to.save}")
 	public void saveToDisk() {
 		LOG.info("Save scheduled time {}", dateFormat.format(new Date()));
 		messageService.saveToDisk();

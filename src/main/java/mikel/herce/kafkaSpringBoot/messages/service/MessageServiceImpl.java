@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mikel.herce.kafkaSpringBoot.ApplicationConfig;
 import mikel.herce.kafkaSpringBoot.constants.LogConstant;
 import mikel.herce.kafkaSpringBoot.disk.repository.DiskRespository;
 import mikel.herce.kafkaSpringBoot.messages.helper.MessageFormatterHelper;
@@ -18,6 +19,9 @@ public class MessageServiceImpl implements MessageService {
 
 	private static Logger LOG = LoggerFactory.getLogger(MessageServiceImpl.class);
 
+	@Autowired
+	ApplicationConfig appConfig;
+	
 	@Autowired
 	MessageRepository messageRepository;
 
@@ -54,7 +58,7 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	private boolean isMessageLimitReached() {
-		return messageRepository.getAllMessages().size() >= 10 ? true : false;
+		return messageRepository.getAllMessages().size() >= appConfig.getMessageLimit() ? true : false;
 	}
 
 }
