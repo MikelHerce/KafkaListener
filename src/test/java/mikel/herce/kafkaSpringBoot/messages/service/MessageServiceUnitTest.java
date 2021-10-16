@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import mikel.herce.kafkaSpringBoot.ApplicationConfig;
 import mikel.herce.kafkaSpringBoot.disk.repository.DiskRepository;
-import mikel.herce.kafkaSpringBoot.disk.repository.EmptyTextToSaveException;
+import mikel.herce.kafkaSpringBoot.exceptions.EmptyTextToSaveException;
 import mikel.herce.kafkaSpringBoot.messages.helper.MessageFormatterHelper;
 import mikel.herce.kafkaSpringBoot.messages.repository.MessageRepository;
 

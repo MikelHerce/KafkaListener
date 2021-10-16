@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mikel.herce.kafkaSpringBoot.ApplicationConfig;
+import mikel.herce.kafkaSpringBoot.exceptions.EmptyTextToSaveException;
 
 @Component
 public class DiskRespositoryImpl implements DiskRepository {
@@ -22,6 +23,8 @@ public class DiskRespositoryImpl implements DiskRepository {
 	ApplicationConfig appConfig;
 
 	public static long number = 0;
+	
+	
 
 	@Override
 	public void saveToDisk(String text) throws EmptyTextToSaveException {
@@ -30,6 +33,7 @@ public class DiskRespositoryImpl implements DiskRepository {
 		}
 
 		number++;
+		
 		Path path = Paths.get(appConfig.getPathToSave() + number + ".gzip");
 
 		try {

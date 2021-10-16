@@ -35,7 +35,7 @@ public class ScheduledMessageSaver {
 			messageService.save();
 			
 		} catch (Exception e) {
-			LOG.error("Nothing to save");
+			LOG.warn("Nothing to save");
 		}
 
 	}

@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mikel.herce.kafkaSpringBoot.disk.repository.EmptyTextToSaveException;
+import mikel.herce.kafkaSpringBoot.exceptions.EmptyTextToSaveException;
 import mikel.herce.kafkaSpringBoot.messages.service.MessageService;
 
 @RestController
@@ -18,6 +19,9 @@ public class MessageController {
 
 	@Autowired
 	MessageService messageService;
+	
+	@Autowired
+	private KafkaTemplate<String, String> producer;
 
 	@GetMapping("/addMessage/{message}")
 	public void addMessage(@PathVariable String message) throws IOException {

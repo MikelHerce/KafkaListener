@@ -1,4 +1,4 @@
-package mikel.herce.kafkaSpringBoot.disk.repository;
+package mikel.herce.kafkaSpringBoot.exceptions;
 
 public class EmptyTextToSaveException extends Exception {
 

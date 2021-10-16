@@ -9,20 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mikel.herce.kafkaSpringBoot.ApplicationConfig;
-import mikel.herce.kafkaSpringBoot.constants.LogConstant;
 import mikel.herce.kafkaSpringBoot.disk.repository.DiskRepository;
-import mikel.herce.kafkaSpringBoot.disk.repository.EmptyTextToSaveException;
+import mikel.herce.kafkaSpringBoot.exceptions.EmptyTextToSaveException;
 import mikel.herce.kafkaSpringBoot.messages.helper.MessageFormatterHelper;
 import mikel.herce.kafkaSpringBoot.messages.repository.MessageRepository;
 
 @Service
 public class MessageServiceImpl implements MessageService {
 
+	public static final String DOUBLE_POINT_SPACE = ": ";
+	public static final String MESSAGE_ADDED = "Message added";
+
 	private static Logger LOG = LoggerFactory.getLogger(MessageServiceImpl.class);
 
 	@Autowired
 	ApplicationConfig appConfig;
-	
+
 	@Autowired
 	MessageRepository messageRepository;
 
@@ -33,9 +35,9 @@ public class MessageServiceImpl implements MessageService {
 	MessageFormatterHelper messageFomatter;
 
 	@Override
-	public void addMessage(String message) throws IOException, EmptyTextToSaveException{
+	public void addMessage(String message) throws IOException, EmptyTextToSaveException {
 		messageRepository.addMessage(message);
-		LOG.info(LogConstant.MESSAGE_ADDED + LogConstant.DOUBLE_POINT_SPACE + message);
+		LOG.info(MESSAGE_ADDED + DOUBLE_POINT_SPACE + message);
 		if (isMessageLimitReached()) {
 			this.save();
 		}
