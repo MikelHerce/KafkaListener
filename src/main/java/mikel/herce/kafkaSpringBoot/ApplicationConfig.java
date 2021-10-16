@@ -17,6 +17,13 @@ public class ApplicationConfig {
 	@Value("${miliseconds.to.save}")
 	private long secondsToSave;
 
+	@Value("${kafka.topic}")
+	private String kafkaTopic;
+
+	public String getKafkaTopic() {
+		return kafkaTopic;
+	}
+
 	public int getMessageLimit() {
 		return messageLimit;
 	}
