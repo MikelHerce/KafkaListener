@@ -9,6 +9,6 @@ public interface MessageService {
 	public void addMessage(String message) throws IOException, EmptyTextToSaveException;
 	public List<String> getAllMessages();
 	public void deleteAllMessages();
-	public void saveToDisk() throws EmptyTextToSaveException;
+	public void save() throws EmptyTextToSaveException;
 	
 }

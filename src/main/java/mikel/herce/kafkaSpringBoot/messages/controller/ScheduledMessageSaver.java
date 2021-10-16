@@ -32,7 +32,7 @@ public class ScheduledMessageSaver {
 	private void saveToDisk() {
 		LOG.info("Save scheduled time {}", dateFormat.format(new Date()));
 		try {
-			messageService.saveToDisk();
+			messageService.save();
 			
 		} catch (Exception e) {
 			LOG.error("Nothing to save");

@@ -37,12 +37,12 @@ public class MessageServiceImpl implements MessageService {
 		messageRepository.addMessage(message);
 		LOG.info(LogConstant.MESSAGE_ADDED + LogConstant.DOUBLE_POINT_SPACE + message);
 		if (isMessageLimitReached()) {
-			this.saveToDisk();
+			this.save();
 		}
 	}
 
 	@Override
-	public void saveToDisk() throws EmptyTextToSaveException {
+	public void save() throws EmptyTextToSaveException {
 		String textToSave = messageFomatter.formatMessages(getAllMessages());
 		diskRepository.saveToDisk(textToSave);
 		messageRepository.deleteMessages();

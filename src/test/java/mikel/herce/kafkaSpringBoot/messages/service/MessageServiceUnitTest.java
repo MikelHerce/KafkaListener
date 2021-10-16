@@ -63,7 +63,7 @@ public class MessageServiceUnitTest {
 		String formattedText = "formatted text";
 		Mockito.when(messageFormatter.formatMessages(Mockito.anyList())).thenReturn(formattedText);
 		// when
-		messageService.saveToDisk();
+		messageService.save();
 		// then
 		Mockito.verify(mockedMessageRepository).deleteMessages();
 		Mockito.verify(mockedDiskRepository).saveToDisk("formatted text");
