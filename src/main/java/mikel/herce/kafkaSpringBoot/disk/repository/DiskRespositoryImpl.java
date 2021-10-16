@@ -22,10 +22,9 @@ public class DiskRespositoryImpl implements DiskRepository {
 
 	@Autowired
 	ApplicationConfig appConfig;
-	
+
 	@Autowired
 	FileNameHelper fileNameHelper;
-
 
 	@Override
 	public void saveToDisk(String text) throws EmptyTextToSaveException {
@@ -35,7 +34,6 @@ public class DiskRespositoryImpl implements DiskRepository {
 
 		Path path = Paths.get(appConfig.getPathToSave() + fileNameHelper.generateFileName() + ".gzip");
 
-		
 		try (GZIPOutputStream gos = new GZIPOutputStream(new FileOutputStream(path.toFile()))) {
 			gos.write(text.getBytes(StandardCharsets.UTF_8));
 		} catch (Exception e) {
