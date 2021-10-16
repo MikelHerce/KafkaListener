@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>mikel.herce</groupId>
 	<artifactId>kafkaSpringBoot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<name>kafkaSpringBoot</name>
 	<description>kafka message handler</description>
 	<properties>
