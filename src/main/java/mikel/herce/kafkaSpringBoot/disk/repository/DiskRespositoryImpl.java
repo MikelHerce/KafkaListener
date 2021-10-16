@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mikel.herce.kafkaSpringBoot.ApplicationConfig;
+import mikel.herce.kafkaSpringBoot.disk.helper.FileNameHelper;
 import mikel.herce.kafkaSpringBoot.exceptions.EmptyTextToSaveException;
 
 @Component
@@ -21,10 +22,10 @@ public class DiskRespositoryImpl implements DiskRepository {
 
 	@Autowired
 	ApplicationConfig appConfig;
+	
+	@Autowired
+	FileNameHelper fileNameHelper;
 
-	public static long number = 0;
-	
-	
 
 	@Override
 	public void saveToDisk(String text) throws EmptyTextToSaveException {
@@ -32,17 +33,13 @@ public class DiskRespositoryImpl implements DiskRepository {
 			throw new EmptyTextToSaveException();
 		}
 
-		number++;
+		Path path = Paths.get(appConfig.getPathToSave() + fileNameHelper.generateFileName() + ".gzip");
+
 		
-		Path path = Paths.get(appConfig.getPathToSave() + number + ".gzip");
-
-		try {
-			try (GZIPOutputStream gos = new GZIPOutputStream(new FileOutputStream(path.toFile()))) {
-				gos.write(text.getBytes(StandardCharsets.UTF_8));
-			}
-
+		try (GZIPOutputStream gos = new GZIPOutputStream(new FileOutputStream(path.toFile()))) {
+			gos.write(text.getBytes(StandardCharsets.UTF_8));
 		} catch (Exception e) {
-			LOG.error("ERROOOOOOR");
+			LOG.error("Error saving to disk: " + e.getMessage());
 		}
 
 	}

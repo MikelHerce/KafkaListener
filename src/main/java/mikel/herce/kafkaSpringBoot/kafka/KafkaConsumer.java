@@ -1,4 +1,4 @@
-package mikel.herce.kafkaSpringBoot.messages.controller;
+package mikel.herce.kafkaSpringBoot.kafka;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import mikel.herce.kafkaSpringBoot.exceptions.EmptyTextToSaveException;
 import mikel.herce.kafkaSpringBoot.messages.service.MessageService;
 
 @Component
-public class KafkaListenerComponent {
+public class KafkaConsumer {
 
 	@Autowired
 	MessageService messageService;
@@ -21,10 +21,10 @@ public class KafkaListenerComponent {
 	@Autowired
 	static ApplicationConfig appConfig;
 
-	private static final Logger LOG = LoggerFactory.getLogger(KafkaListenerComponent.class);
+	private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumer.class);
 
 	@KafkaListener(topics = "${kafka.topic}")
-	public void receiveMessage(final String message) {
+	public void consumeMessage(final String message) {
 		System.out.println("Received: " + message);
 		try {
 			messageService.addMessage(message);

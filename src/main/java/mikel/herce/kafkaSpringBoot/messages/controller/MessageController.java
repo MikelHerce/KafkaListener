@@ -24,9 +24,9 @@ public class MessageController {
 		try {
 			messageService.addMessage(message);
 		} catch (EmptyTextToSaveException e) {
-
+			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
