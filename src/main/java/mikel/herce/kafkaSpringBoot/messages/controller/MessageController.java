@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,16 +18,13 @@ public class MessageController {
 
 	@Autowired
 	MessageService messageService;
-	
-	@Autowired
-	private KafkaTemplate<String, String> producer;
 
 	@GetMapping("/addMessage/{message}")
 	public void addMessage(@PathVariable String message) throws IOException {
 		try {
 			messageService.addMessage(message);
 		} catch (EmptyTextToSaveException e) {
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
