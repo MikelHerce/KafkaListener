@@ -1,18 +1,12 @@
 # KafkaListener
-
-
 This app consumes Kafka topic, saving received messages to disk in gzip files.
 The saving action is executed when an amount of messages is received, and every defined time (scheduled action).
 
 To execute app:
---------------------------
 - mvn clean install
 - java -jar {jarPath} (will use application.properties defined into the jar)
 - java -jar {jarPath}  --spring.config.location=file:{customFilePath} (to use external config file)
---------------------------
-
 the config file must define
---------------------------
 path.to.save={path}
 messages.limit={numberOfMessagesToSave}
 miliseconds.to.save={milisecondsToSave}
@@ -20,13 +14,11 @@ miliseconds.to.save={milisecondsToSave}
 spring.kafka.bootstrap-servers={kafkaServerAdress}
 spring.kafka.consumer.group-id={group-id}
 kafka.topic={kafkaTopic}
---------------------------
 
 In my case, kafka server that i used, is docker based:
 {kafkaServerHost} must be defined into docker-compose.yaml file.
 
 docker-compose.yaml:
---------------------------
 version: '2'
 services:
   zookeeper:
@@ -51,5 +43,3 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-        
---------------------------
