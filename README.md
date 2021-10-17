@@ -11,7 +11,7 @@ To execute app:
 - java -jar {jarPath}  --spring.config.location=file:{customFilePath} (to use external config file)
 --------------------------
 
-the config file must define:
+the config file must define
 --------------------------
 path.to.save={path}
 messages.limit={numberOfMessagesToSave}
