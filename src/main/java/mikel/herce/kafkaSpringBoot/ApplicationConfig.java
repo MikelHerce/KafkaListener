@@ -15,7 +15,7 @@ public class ApplicationConfig {
 	private String pathToSave;
 
 	@Value("${miliseconds.to.save}")
-	private long secondsToSave;
+	private long miliSecondsToSave;
 
 	@Value("${kafka.topic}")
 	private String kafkaTopic;
@@ -32,8 +32,8 @@ public class ApplicationConfig {
 		return pathToSave;
 	}
 
-	public long getSecondsToSave() {
-		return secondsToSave;
+	public long getMiliSecondsToSave() {
+		return miliSecondsToSave;
 	}
 
 }
